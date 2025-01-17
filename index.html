@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text-to-Voice</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #5b47d1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #fff;
+        }
+
+        .container {
+            background-color: #2c2058;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 400px;
+        }
+
+        .container h1 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .container textarea {
+            width: 100%;
+            height: 100px;
+            border-radius: 5px;
+            border: none;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: #333;
+            resize: none;
+            outline: none;
+        }
+
+        .container select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: #333;
+            outline: none;
+        }
+
+        .container button {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Text-to-Voice</h1>
+        <textarea id="text-input" placeholder="Matnni kiriting..."></textarea>
+        <select id="language-select">
+            <option value="es-ES">Google español (es-ES)</option>
+            <option value="en-US">Google English (en-US)</option>
+            <option value="ru-RU">Google русский (ru-RU)</option>
+        </select>
+        <button id="speak-button">Ovoz chiqarish</button>
+    </div>
+
+    <script>
+        const textInput = document.getElementById('text-input');
+        const languageSelect = document.getElementById('language-select');
+        const speakButton = document.getElementById('speak-button');
+
+        speakButton.addEventListener('click', () => {
+            const text = textInput.value;
+            const language = languageSelect.value;
+
+            if (text.trim() === '') {
+                alert('Iltimos, matn kiriting!');
+                return;
+            }
+
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = language;
+            window.speechSynthesis.speak(utterance);
+        });
+    </script>
+</body>
+</html>
